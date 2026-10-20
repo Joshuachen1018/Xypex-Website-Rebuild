@@ -53,6 +53,7 @@
     footer [data-footgroup] { width: max-content !important; max-width: 100% !important; margin-left: auto !important; margin-right: auto !important; text-align: left !important; }
     footer [style*="justify-content: space-between"] { justify-content: center !important; }
   }
+[data-inquiry] input::placeholder, [data-inquiry] textarea::placeholder { color:#8a99a5; opacity:1; }
 </style>
 </helmet>
 
@@ -381,7 +382,7 @@
     </section>
 
     <!-- WHY BAOHONG (pinned horizontal scroll) -->
-    <section data-why="" style="background:#f6f9fb; border-top:1px solid #eaeff3; height:240vh; position:relative;">
+    <section data-why="" style="background:#f6f9fb; border-top:1px solid #eaeff3; height:280vh; position:relative;">
       <div style="position:sticky; top:0; height:100vh; overflow:hidden; display:flex; flex-direction:column; justify-content:center; background-image:linear-gradient(rgba(63,134,196,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(63,134,196,0.06) 1px, transparent 1px); background-size:56px 56px; background-position:center top;">
       <div style="position:absolute; right:-0.04em; top:50%; transform:translateY(-50%); font-family:'Space Grotesk',sans-serif; font-size:clamp(200px,26vw,420px); font-weight:700; line-height:0.8; letter-spacing:-0.04em; color:transparent; -webkit-text-stroke:1.5px rgba(63,134,196,0.14); pointer-events:none; user-select:none;">WHY</div>
       <div style="position:relative; max-width:1280px; width:100%; margin:0 auto; padding:0 40px; box-sizing:border-box;">
@@ -401,12 +402,12 @@
         </div>
         <div data-why-view="" style="margin-top:36px; position:relative;">
           <div data-why-track="" style="display:flex; gap:32px; will-change:transform;">
-            <div style="flex:0 0 calc((100% - 64px) / 3); min-width:0; position:relative; height:min(58vh, 560px); border-radius:var(--radius,6px); overflow:hidden; background:#eef3f7; box-shadow:0 18px 40px -24px rgba(20,32,43,0.45);"><div style="position:absolute; inset:0; transition:transform .8s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);"><img src="assets/why-2b.png" alt="完整 SOP 施工經驗" style="width:100%; height:100%; object-fit:cover; display:block;"></div><div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,20,30,0.82) 0%, rgba(10,20,30,0.35) 40%, rgba(10,20,30,0) 65%); pointer-events:none;"></div><div style="position:absolute; left:28px; bottom:calc(24px + clamp(18px,1.6vw,24px) * 1.5 + 10px); font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,3.4vw,52px); font-weight:700; line-height:1; color:#ffffff;">01</div><div style="position:absolute; left:28px; right:28px; bottom:24px; font-size:clamp(18px,1.6vw,24px); font-weight:800; line-height:1.5; color:#ffffff;">完整 SOP 施工經驗</div></div>
-            <div style="flex:0 0 calc((100% - 64px) / 3); min-width:0; position:relative; height:min(58vh, 560px); border-radius:var(--radius,6px); overflow:hidden; background:#eef3f7; box-shadow:0 18px 40px -24px rgba(20,32,43,0.45);"><div style="position:absolute; inset:0; transition:transform .8s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);"><img src="assets/why-2c.png" alt="材料與工程整合" style="width:100%; height:100%; object-fit:cover; object-position:center 62%; display:block;"></div><div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,20,30,0.82) 0%, rgba(10,20,30,0.35) 40%, rgba(10,20,30,0) 65%); pointer-events:none;"></div><div style="position:absolute; left:28px; bottom:calc(24px + clamp(18px,1.6vw,24px) * 1.5 + 10px); font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,3.4vw,52px); font-weight:700; line-height:1; color:#ffffff;">02</div><div style="position:absolute; left:28px; right:28px; bottom:24px; font-size:clamp(18px,1.6vw,24px); font-weight:800; line-height:1.5; color:#ffffff;">材料與工程整合</div></div>
-            <div style="flex:0 0 calc((100% - 64px) / 3); min-width:0; position:relative; height:min(58vh, 560px); border-radius:var(--radius,6px); overflow:hidden; background:#eef3f7; box-shadow:0 18px 40px -24px rgba(20,32,43,0.45);"><div style="position:absolute; inset:0; transition:transform .8s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);"><img src="assets/why-3b.png" alt="全台工程實績" style="width:100%; height:100%; object-fit:cover; object-position:center 40%; display:block;"></div><div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,20,30,0.82) 0%, rgba(10,20,30,0.35) 40%, rgba(10,20,30,0) 65%); pointer-events:none;"></div><div style="position:absolute; left:28px; bottom:calc(24px + clamp(18px,1.6vw,24px) * 1.5 + 10px); font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,3.4vw,52px); font-weight:700; line-height:1; color:#ffffff;">03</div><div style="position:absolute; left:28px; right:28px; bottom:24px; font-size:clamp(18px,1.6vw,24px); font-weight:800; line-height:1.5; color:#ffffff;">全台工程實績</div></div>
-            <div style="flex:0 0 calc((100% - 64px) / 3); min-width:0; position:relative; height:min(58vh, 560px); border-radius:var(--radius,6px); overflow:hidden; background:#eef3f7; box-shadow:0 18px 40px -24px rgba(20,32,43,0.45);"><div style="position:absolute; inset:0; transition:transform .8s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);"><img src="assets/why-4b.png" alt="專業施工團隊" style="width:100%; height:100%; object-fit:cover; object-position:center 40%; display:block;"></div><div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,20,30,0.82) 0%, rgba(10,20,30,0.35) 40%, rgba(10,20,30,0) 65%); pointer-events:none;"></div><div style="position:absolute; left:28px; bottom:calc(24px + clamp(18px,1.6vw,24px) * 1.5 + 10px); font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,3.4vw,52px); font-weight:700; line-height:1; color:#ffffff;">04</div><div style="position:absolute; left:28px; right:28px; bottom:24px; font-size:clamp(18px,1.6vw,24px); font-weight:800; line-height:1.5; color:#ffffff;">專業施工團隊</div></div>
-            <div style="flex:0 0 calc((100% - 64px) / 3); min-width:0; position:relative; height:min(58vh, 560px); border-radius:var(--radius,6px); overflow:hidden; background:#eef3f7; box-shadow:0 18px 40px -24px rgba(20,32,43,0.45);"><div style="position:absolute; inset:0; transition:transform .8s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);"><img src="assets/why-5b.png" alt="技術支援" style="width:100%; height:100%; object-fit:cover; object-position:center 45%; display:block;"></div><div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,20,30,0.82) 0%, rgba(10,20,30,0.35) 40%, rgba(10,20,30,0) 65%); pointer-events:none;"></div><div style="position:absolute; left:28px; bottom:calc(24px + clamp(18px,1.6vw,24px) * 1.5 + 10px); font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,3.4vw,52px); font-weight:700; line-height:1; color:#ffffff;">05</div><div style="position:absolute; left:28px; right:28px; bottom:24px; font-size:clamp(18px,1.6vw,24px); font-weight:800; line-height:1.5; color:#ffffff;">技術支援</div></div>
-            <div style="flex:0 0 calc((100% - 64px) / 3); min-width:0; position:relative; height:min(58vh, 560px); border-radius:var(--radius,6px); overflow:hidden; background:#eef3f7; box-shadow:0 18px 40px -24px rgba(20,32,43,0.45);"><div style="position:absolute; inset:0; transition:transform .8s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);"><img src="assets/why-6.png" alt="長期思維" style="width:100%; height:100%; object-fit:cover; display:block;"></div><div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,20,30,0.82) 0%, rgba(10,20,30,0.35) 40%, rgba(10,20,30,0) 65%); pointer-events:none;"></div><div style="position:absolute; left:28px; bottom:calc(24px + clamp(18px,1.6vw,24px) * 1.5 + 10px); font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,3.4vw,52px); font-weight:700; line-height:1; color:#ffffff;">06</div><div style="position:absolute; left:28px; right:28px; bottom:24px; font-size:clamp(18px,1.6vw,24px); font-weight:800; line-height:1.5; color:#ffffff;">長期思維</div></div>
+            <div style="flex:0 0 calc((100% - 64px) / 3); min-width:0; position:relative; height:min(58vh, 560px); border-radius:var(--radius,6px); overflow:hidden; background:#eef3f7; box-shadow:0 18px 40px -24px rgba(20,32,43,0.45); cursor:pointer;" onClick="{{ whyGo1 }}"><div style="position:absolute; inset:0; transition:transform .8s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);"><img src="assets/why-01.png" alt="完整 SOP 施工經驗" style="width:100%; height:100%; object-fit:cover; display:block;"></div><div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,20,30,0.82) 0%, rgba(10,20,30,0.35) 40%, rgba(10,20,30,0) 65%); pointer-events:none;"></div><div style="position:absolute; left:28px; bottom:calc(24px + clamp(18px,1.6vw,24px) * 1.5 + 10px); font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,3.4vw,52px); font-weight:700; line-height:1; color:#ffffff;">01</div><div style="position:absolute; left:28px; right:28px; bottom:24px; font-size:clamp(18px,1.6vw,24px); font-weight:800; line-height:1.5; color:#ffffff;">完整 SOP 施工經驗</div></div>
+            <div style="flex:0 0 calc((100% - 64px) / 3); min-width:0; position:relative; height:min(58vh, 560px); border-radius:var(--radius,6px); overflow:hidden; background:#eef3f7; box-shadow:0 18px 40px -24px rgba(20,32,43,0.45); cursor:pointer;" onClick="{{ whyGo2 }}"><div style="position:absolute; inset:0; transition:transform .8s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);"><img src="assets/why-02.png" alt="材料與工程整合" style="width:100%; height:100%; object-fit:cover; display:block;"></div><div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,20,30,0.82) 0%, rgba(10,20,30,0.35) 40%, rgba(10,20,30,0) 65%); pointer-events:none;"></div><div style="position:absolute; left:28px; bottom:calc(24px + clamp(18px,1.6vw,24px) * 1.5 + 10px); font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,3.4vw,52px); font-weight:700; line-height:1; color:#ffffff;">02</div><div style="position:absolute; left:28px; right:28px; bottom:24px; font-size:clamp(18px,1.6vw,24px); font-weight:800; line-height:1.5; color:#ffffff;">材料與工程整合</div></div>
+            <div style="flex:0 0 calc((100% - 64px) / 3); min-width:0; position:relative; height:min(58vh, 560px); border-radius:var(--radius,6px); overflow:hidden; background:#eef3f7; box-shadow:0 18px 40px -24px rgba(20,32,43,0.45); cursor:pointer;" onClick="{{ whyGo3 }}"><div style="position:absolute; inset:0; transition:transform .8s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);"><img src="assets/why-03.png" alt="全台工程實績" style="width:100%; height:100%; object-fit:cover; display:block;"></div><div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,20,30,0.82) 0%, rgba(10,20,30,0.35) 40%, rgba(10,20,30,0) 65%); pointer-events:none;"></div><div style="position:absolute; left:28px; bottom:calc(24px + clamp(18px,1.6vw,24px) * 1.5 + 10px); font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,3.4vw,52px); font-weight:700; line-height:1; color:#ffffff;">03</div><div style="position:absolute; left:28px; right:28px; bottom:24px; font-size:clamp(18px,1.6vw,24px); font-weight:800; line-height:1.5; color:#ffffff;">全台工程實績</div></div>
+            <div style="flex:0 0 calc((100% - 64px) / 3); min-width:0; position:relative; height:min(58vh, 560px); border-radius:var(--radius,6px); overflow:hidden; background:#eef3f7; box-shadow:0 18px 40px -24px rgba(20,32,43,0.45); cursor:pointer;" onClick="{{ whyGo4 }}"><div style="position:absolute; inset:0; transition:transform .8s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);"><img src="assets/why-04.png" alt="專業施工團隊" style="width:100%; height:100%; object-fit:cover; display:block;"></div><div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,20,30,0.82) 0%, rgba(10,20,30,0.35) 40%, rgba(10,20,30,0) 65%); pointer-events:none;"></div><div style="position:absolute; left:28px; bottom:calc(24px + clamp(18px,1.6vw,24px) * 1.5 + 10px); font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,3.4vw,52px); font-weight:700; line-height:1; color:#ffffff;">04</div><div style="position:absolute; left:28px; right:28px; bottom:24px; font-size:clamp(18px,1.6vw,24px); font-weight:800; line-height:1.5; color:#ffffff;">專業施工團隊</div></div>
+            <div style="flex:0 0 calc((100% - 64px) / 3); min-width:0; position:relative; height:min(58vh, 560px); border-radius:var(--radius,6px); overflow:hidden; background:#eef3f7; box-shadow:0 18px 40px -24px rgba(20,32,43,0.45); cursor:pointer;" onClick="{{ whyGo5 }}"><div style="position:absolute; inset:0; transition:transform .8s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);"><img src="assets/why-05.png" alt="技術支援" style="width:100%; height:100%; object-fit:cover; display:block;"></div><div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,20,30,0.82) 0%, rgba(10,20,30,0.35) 40%, rgba(10,20,30,0) 65%); pointer-events:none;"></div><div style="position:absolute; left:28px; bottom:calc(24px + clamp(18px,1.6vw,24px) * 1.5 + 10px); font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,3.4vw,52px); font-weight:700; line-height:1; color:#ffffff;">05</div><div style="position:absolute; left:28px; right:28px; bottom:24px; font-size:clamp(18px,1.6vw,24px); font-weight:800; line-height:1.5; color:#ffffff;">技術支援</div></div>
+            <div style="flex:0 0 calc((100% - 64px) / 3); min-width:0; position:relative; height:min(58vh, 560px); border-radius:var(--radius,6px); overflow:hidden; background:#eef3f7; box-shadow:0 18px 40px -24px rgba(20,32,43,0.45); cursor:pointer;" onClick="{{ whyGo6 }}"><div style="position:absolute; inset:0; transition:transform .8s cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);"><img src="assets/why-06.png" alt="長期思維" style="width:100%; height:100%; object-fit:cover; display:block;"></div><div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,20,30,0.82) 0%, rgba(10,20,30,0.35) 40%, rgba(10,20,30,0) 65%); pointer-events:none;"></div><div style="position:absolute; left:28px; bottom:calc(24px + clamp(18px,1.6vw,24px) * 1.5 + 10px); font-family:'Space Grotesk',sans-serif; font-size:clamp(34px,3.4vw,52px); font-weight:700; line-height:1; color:#ffffff;">06</div><div style="position:absolute; left:28px; right:28px; bottom:24px; font-size:clamp(18px,1.6vw,24px); font-weight:800; line-height:1.5; color:#ffffff;">長期思維</div></div>
           </div>
         </div>
         <div style="margin-top:32px; height:2px; background:#dde6ed; overflow:hidden;"><div data-why-fill="" style="height:100%; background:var(--accent,#3f86c4); transform-origin:left center; transform:scaleX(0.5);"></div></div>
@@ -456,12 +457,12 @@
             <h2 style="font-size:clamp(30px,3.8vw,52px); font-weight:900; line-height:1.5; color:#14202b; letter-spacing:-0.005em; text-wrap:pretty;">從材料出發，<br>走進工程現場，延伸至建築全週期。</h2>
             </div>
             <div style="display:flex; align-items:baseline; gap:14px;">
-              <span style="font-family:'Space Grotesk',sans-serif; font-size:clamp(48px,5vw,72px); font-weight:700; line-height:1; color:var(--accent,#3f86c4);">1990</span>
+              <span style="font-family:'Space Grotesk',sans-serif; font-size:clamp(48px,5vw,72px); font-weight:700; line-height:1; color:var(--accent,#3f86c4);">1993</span>
               <span style="font-size:14px; font-weight:600; letter-spacing:0.1em; color:#7a8893;">寶鴻始於</span>
             </div>
           </div>
           <div style="display:flex; flex-direction:column; gap:26px; font-size:18px; line-height:2.1; color:#56656f; text-wrap:pretty;">
-            <p style="font-size:clamp(20px,1.9vw,26px); font-weight:800; line-height:1.8; color:#14202b;">寶鴻始於 1990 年，長期專注於建築防水、防熱、外牆塗裝與工業地坪相關材料及工程服務。</p>
+            <p style="font-size:clamp(20px,1.9vw,26px); font-weight:800; line-height:1.8; color:#14202b;">寶鴻始於 1993 年，長期專注於建築防水、防熱、外牆塗裝與工業地坪相關材料及工程服務。</p>
             <p>三十多年來，我們從材料出發，持續累積不同建築條件與施工環境下的實務經驗，逐步建立<strong style="color:#14202b; font-weight:700;">適材適用、系統規劃、工法設計到專業施工</strong>的整合能力。</p>
             <p>隨著建築需求不斷改變，寶鴻也從單一材料與工程服務，逐步發展為涵蓋<strong style="color:#14202b; font-weight:700;">防水、防熱、建築塗裝與工業地坪的系統解決方案</strong>，並持續延伸技術支援、系統選型、工程管理與全週期服務。</p>
             <div style="margin:18px 0; padding:32px 0; border-top:1px solid #e3eaf0; border-bottom:1px solid #e3eaf0; display:flex; flex-direction:column; gap:10px;">
@@ -818,31 +819,72 @@
             </div>
           </sc-for>
         </div>
-        <div style="margin-top:28px; aspect-ratio:16/9; border-radius:var(--radius,2px); background:repeating-linear-gradient(135deg,#e8eef3 0 14px,#dfe8ee 14px 28px); border:1px solid #e3eaef; position:relative;">
-          <span style="position:absolute; left:16px; bottom:14px; font-family:'Space Grotesk',monospace; font-size:11px; color:#8aa0b0; background:rgba(255,255,255,0.85); padding:4px 9px; border-radius:3px;">map · 高雄市鳥松區</span>
+        <div style="margin-top:28px; aspect-ratio:16/9; border-radius:var(--radius,2px); border:1px solid #e3eaef; overflow:hidden; background:#e8eef3;">
+          <iframe src="https://www.google.com/maps?q=%E9%AB%98%E9%9B%84%E5%B8%82%E9%B3%A5%E6%9D%BE%E5%8D%80%E6%B0%B4%E7%AE%A1%E8%B7%AF%E4%BA%8C%E5%B7%B71-28%E8%99%9F&amp;output=embed" title="寶鴻防水 地圖" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width:100%; height:100%; border:0; display:block;"></iframe>
         </div>
       </div>
-      <div style="background:#f6f9fb; border:1px solid #eaeff3; border-radius:var(--radius,2px); padding:40px;">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+      <form data-inquiry="" onSubmit="{{ submitInquiry }}" style="background:#f6f9fb; border:1px solid #eaeff3; border-radius:var(--radius,2px); padding:40px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;">
           <div style="display:flex; flex-direction:column; gap:8px;">
-            <label style="font-size:13px; font-weight:600; color:#3a4955;">姓名</label>
-            <input placeholder="您的姓名" style="font-family:inherit; font-size:15px; padding:13px 14px; border:1px solid #dde6ec; border-radius:var(--radius,2px); background:#fff; outline:none;">
+            <label style="font-size:16px; font-weight:700; color:#14202b;">姓名 / 稱呼<span style="color:#c4453f; margin-left:3px;">*</span></label>
+            <input name="name" required="" placeholder="請輸入您的姓名或稱呼" style="font-family:inherit; font-size:15px; padding:13px 14px; border:1px solid #dde6ec; border-radius:var(--radius,2px); background:#fff; outline:none;">
           </div>
           <div style="display:flex; flex-direction:column; gap:8px;">
-            <label style="font-size:13px; font-weight:600; color:#3a4955;">聯絡電話</label>
-            <input placeholder="您的電話" style="font-family:inherit; font-size:15px; padding:13px 14px; border:1px solid #dde6ec; border-radius:var(--radius,2px); background:#fff; outline:none;">
+            <label style="font-size:16px; font-weight:700; color:#14202b;">聯絡電話<span style="color:#c4453f; margin-left:3px;">*</span></label>
+            <input name="phone" type="tel" required="" placeholder="手機或市話，含分機" style="font-family:inherit; font-size:15px; padding:13px 14px; border:1px solid #dde6ec; border-radius:var(--radius,2px); background:#fff; outline:none;">
           </div>
           <div style="display:flex; flex-direction:column; gap:8px; grid-column:1 / -1;">
-            <label style="font-size:13px; font-weight:600; color:#3a4955;">電子信箱</label>
-            <input placeholder="您的 Email" style="font-family:inherit; font-size:15px; padding:13px 14px; border:1px solid #dde6ec; border-radius:var(--radius,2px); background:#fff; outline:none;">
+            <label style="font-size:16px; font-weight:700; color:#14202b;">電子信箱<span style="font-weight:400; color:#8a99a5; margin-left:6px;">選填</span></label>
+            <input name="email" type="email" placeholder="請輸入您的電子信箱" style="font-family:inherit; font-size:15px; padding:13px 14px; border:1px solid #dde6ec; border-radius:var(--radius,2px); background:#fff; outline:none;">
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label style="font-size:16px; font-weight:700; color:#14202b;">工程所在行政區<span style="color:#c4453f; margin-left:3px;">*</span></label>
+            <div data-dd="" style="position:relative;">
+              <button type="button" onClick="{{ ddDistrict.toggle }}" style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:10px; font-family:inherit; font-size:15px; padding:13px 14px; border:1px solid #dde6ec; border-radius:var(--radius,2px); background:#fff; color:{{ ddDistrict.color }}; text-align:left; cursor:pointer;"><span>{{ ddDistrict.label }}</span><span style="width:7px; height:7px; border-right:1.5px solid #7a8893; border-bottom:1.5px solid #7a8893; margin:-4px 4px 0 0; transition:transform .3s; transform:{{ ddDistrict.chev }};"></span></button>
+              <input name="district" required="" tabIndex="-1" aria-hidden="true" value="{{ ddDistrict.value }}" onChange="{{ noop }}" style="position:absolute; left:20px; bottom:0; width:1px; height:1px; opacity:0; pointer-events:none; border:0; padding:0;">
+              <div style="{{ ddDistrict.menuStyle }}">
+                <div aria-hidden="true" style="position:absolute; left:18px; right:18px; top:3px; height:2px; border-radius:2px; pointer-events:none; z-index:2; background:linear-gradient(90deg, rgba(150,205,255,0) 0%, rgba(165,215,255,0.95) 22%, rgba(190,228,255,0.98) 50%, rgba(165,215,255,0.95) 78%, rgba(150,205,255,0) 100%); filter:blur(0.4px);"></div>
+                <div style="max-height:300px; overflow-y:auto; display:flex; flex-direction:column; gap:2px;">
+                  <sc-for list="{{ ddDistrict.options }}" as="o" hint-placeholder-count="6">
+                    <button type="button" onClick="{{ o.onClick }}" style="{{ o.style }}" style-hover="background:rgba(63,134,196,0.26); color:var(--accent-deep,#2c6398); box-shadow:inset 0 0 0 1px rgba(63,134,196,0.4);">{{ o.label }}</button>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label style="font-size:16px; font-weight:700; color:#14202b;">工程詳細地址<span style="font-weight:400; color:#8a99a5; margin-left:6px;">選填</span></label>
+            <input name="address" placeholder="街道、門牌、樓層等" style="font-family:inherit; font-size:15px; padding:13px 14px; border:1px solid #dde6ec; border-radius:var(--radius,2px); background:#fff; outline:none;">
           </div>
           <div style="display:flex; flex-direction:column; gap:8px; grid-column:1 / -1;">
-            <label style="font-size:13px; font-weight:600; color:#3a4955;">諮詢內容</label>
-            <textarea rows="5" placeholder="請描述您的工程需求" style="font-family:inherit; font-size:15px; padding:13px 14px; border:1px solid #dde6ec; border-radius:var(--radius,2px); background:#fff; outline:none; resize:vertical;"></textarea>
+            <label style="font-size:16px; font-weight:700; color:#14202b;">目前工程階段<span style="color:#c4453f; margin-left:3px;">*</span></label>
+            <div data-dd="" style="position:relative;">
+              <button type="button" onClick="{{ ddStage.toggle }}" style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:10px; font-family:inherit; font-size:15px; padding:13px 14px; border:1px solid #dde6ec; border-radius:var(--radius,2px); background:#fff; color:{{ ddStage.color }}; text-align:left; cursor:pointer;"><span>{{ ddStage.label }}</span><span style="width:7px; height:7px; border-right:1.5px solid #7a8893; border-bottom:1.5px solid #7a8893; margin:-4px 4px 0 0; transition:transform .3s; transform:{{ ddStage.chev }};"></span></button>
+              <input name="stage" required="" tabIndex="-1" aria-hidden="true" value="{{ ddStage.value }}" onChange="{{ noop }}" style="position:absolute; left:20px; bottom:0; width:1px; height:1px; opacity:0; pointer-events:none; border:0; padding:0;">
+              <div style="{{ ddStage.menuStyle }}">
+                <div aria-hidden="true" style="position:absolute; left:18px; right:18px; top:3px; height:2px; border-radius:2px; pointer-events:none; z-index:2; background:linear-gradient(90deg, rgba(150,205,255,0) 0%, rgba(165,215,255,0.95) 22%, rgba(190,228,255,0.98) 50%, rgba(165,215,255,0.95) 78%, rgba(150,205,255,0) 100%); filter:blur(0.4px);"></div>
+                <div style="display:flex; flex-direction:column; gap:2px;">
+                  <sc-for list="{{ ddStage.options }}" as="o" hint-placeholder-count="4">
+                    <button type="button" onClick="{{ o.onClick }}" style="{{ o.style }}" style-hover="background:rgba(63,134,196,0.26); color:var(--accent-deep,#2c6398); box-shadow:inset 0 0 0 1px rgba(63,134,196,0.4);">{{ o.label }}</button>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
           </div>
+          <div style="display:flex; flex-direction:column; gap:8px; grid-column:1 / -1;">
+            <label style="font-size:16px; font-weight:700; color:#14202b;">諮詢內容 / 工程需求<span style="color:#c4453f; margin-left:3px;">*</span></label>
+            <textarea name="message" rows="5" required="" placeholder="請描述現場狀況、施作位置及希望協助的事項" style="font-family:inherit; font-size:15px; padding:13px 14px; border:1px solid #dde6ec; border-radius:var(--radius,2px); background:#fff; outline:none; resize:vertical;"></textarea>
+          </div>
+          <label style="grid-column:1 / -1; display:flex; align-items:flex-start; gap:10px; font-size:14px; line-height:1.7; color:#56656f; cursor:pointer;">
+            <input type="checkbox" name="consent" required="" style="accent-color:var(--accent,#3f86c4); margin:5px 0 0; flex-shrink:0;">
+            <span>我已閱讀隱私權政策，並同意提供上述資料，供本次工程諮詢、需求評估及後續聯繫使用。<span style="color:#c4453f; margin-left:3px;">*</span></span>
+          </label>
         </div>
-        <button style="margin-top:24px; width:100%; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#fff; background:var(--accent,#3f86c4); padding:16px; border-radius:var(--radius,2px); transition:background .2s;" style-hover="background:var(--accent-deep,#2c6398);">送出諮詢</button>
-      </div>
+        <button type="submit" style="margin-top:24px; width:100%; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#fff; background:var(--accent,#3f86c4); padding:16px; border-radius:var(--radius,2px); transition:background .2s;" style-hover="background:var(--accent-deep,#2c6398);">送出諮詢</button>
+        <sc-if value="{{ inquirySent }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:16px; font-size:14px; color:#2f6e39; background:#e8f3ea; padding:12px 14px; border-radius:var(--radius,2px);">已收到您的諮詢，我們將盡快與您聯繫。</div>
+        </sc-if>
+      </form>
     </section>
   </main>
   </sc-if>
@@ -877,12 +919,12 @@
           <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:#7d8e9b; margin-bottom:22px;">Follow Us</div>
           <div data-footgroup="" style="display:flex; flex-direction:column; gap:14px;">
             <a href="https://www.facebook.com/xypex.com.tw/?locale=zh_TW" target="_blank" rel="noopener" style="font-size:15px; color:#c7d3dc; transition:color .2s;" style-hover="color:#fff;">Facebook</a>
-            <a href="https://www.youtube.com/channel/UCUVQ-fMNUigkRlzUImy2ZcA" target="_blank" rel="noopener" style="font-size:15px; color:#c7d3dc; transition:color .2s;" style-hover="color:#fff;">Youtube</a><a href="https://www.youtube.com/channel/UCUVQ-fMNUigkRlzUImy2ZcA" target="_blank" rel="noopener" style="font-size:15px; color:#c7d3dc; transition:color .2s;" style-hover="color:#fff;">Gmail</a>
+            <a href="https://www.youtube.com/channel/UCUVQ-fMNUigkRlzUImy2ZcA" target="_blank" rel="noopener" style="font-size:15px; color:#c7d3dc; transition:color .2s;" style-hover="color:#fff;">Youtube</a><a href="mailto:306@bhresin.com.tw" style="font-size:15px; color:#c7d3dc; transition:color .2s;" style-hover="color:#fff;">Gmail</a>
           </div>
         </div>
       </div>
       <div style="padding-top:28px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px;">
-        <span style="font-size:13px; color:#6f808d;">Copyright © 2026 寶鴻防水防熱材料 All Rights Reserved.</span>
+        <span style="font-size:13px; color:#6f808d;">Copyright © 2026 寶鴻防水防熱塗料材料 All Rights Reserved.</span>
         <span style="font-family:'Space Grotesk',sans-serif; font-size:13px; letter-spacing:0.06em; color:#6f808d;">寶鴻防水防熱塗料材料</span>
       </div>
     </div>
@@ -914,6 +956,28 @@ class Component extends DCLogic {
     });
     this._assetMap = map;
     this.setState({ assetsReady: (this.state.assetsReady || 0) + 1 });
+  };
+  makeDD = (key, placeholder, opts) => {
+    const open = this.state.ddOpen === key;
+    const val = (this.state.ddVals || {})[key] || '';
+    return {
+      value: val, label: val || placeholder, color: val ? '#14202b' : '#8a99a5',
+      chev: open ? 'rotate(225deg)' : 'rotate(45deg)',
+      toggle: () => this.setState({ ddOpen: open ? null : key }),
+      menuStyle: 'position:absolute; top:calc(100% + 8px); left:0; right:0; padding:12px 8px 8px; z-index:40;'
+        + ' background:linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.62));'
+        + ' backdrop-filter:blur(13px) saturate(180%) brightness(1.06); -webkit-backdrop-filter:blur(13px) saturate(180%) brightness(1.06);'
+        + ' border:1px solid rgba(255,255,255,0.7); border-radius:22px;'
+        + ' box-shadow:0 28px 64px rgba(16,40,60,0.22), 0 6px 18px rgba(16,40,60,0.12), inset 0 1px 1px rgba(255,255,255,0.9), inset 0 3px 8px rgba(150,205,255,0.35);'
+        + ' transform-origin:top center; transition:opacity .3s cubic-bezier(.22,1,.36,1), transform .46s cubic-bezier(.34,1.46,.5,1), visibility .3s linear;'
+        + (open ? ' opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0) scale(1);' : ' opacity:0; visibility:hidden; pointer-events:none; transform:translateY(-10px) scale(0.94);'),
+      options: opts.map((o) => ({
+        label: o,
+        onClick: () => this.setState({ ddOpen: null, ddVals: { ...(this.state.ddVals || {}), [key]: o } }),
+        style: 'display:block; width:100%; text-align:left; padding:11px 16px; font-family:inherit; font-size:15px; font-weight:500; border-radius:14px; cursor:pointer; transition:background .22s, color .22s, box-shadow .22s;'
+          + (o === val ? ' color:var(--accent-deep,#2c6398); background:rgba(63,134,196,0.18); box-shadow:inset 0 0 0 1px rgba(63,134,196,0.3);' : ' color:#2a3a46; background:transparent;'),
+      })),
+    };
   };
   resolveAsset = (p) => (this._assetMap && this._assetMap[p]) || p;
   // Set hero background-image via direct DOM mutation (the framework's React
@@ -1019,6 +1083,8 @@ class Component extends DCLogic {
     window.addEventListener('hashchange', this._hashL);
     this._onKey = (e) => { if (e.key === 'Escape') this.closeVideo(); };
     window.addEventListener('keydown', this._onKey);
+    this._ddOut = (e) => { if (this.state.ddOpen && !(e.target.closest && e.target.closest('[data-dd]'))) this.setState({ ddOpen: null }); };
+    document.addEventListener('mousedown', this._ddOut);
     this.buildAssetMap();
     setTimeout(() => { this.hydratePhotos(); this.hydrateHero(); }, 40);
   }
@@ -1060,7 +1126,9 @@ class Component extends DCLogic {
     const fill = sec.querySelector('[data-why-fill]');
     const vh = window.innerHeight || 800;
     const r = sec.getBoundingClientRect();
-    const p = Math.max(0, Math.min(1, -r.top / Math.max(1, r.height - vh)));
+    const raw = Math.max(0, Math.min(1, -r.top / Math.max(1, r.height - vh)));
+    const hold = 0.22;
+    const p = Math.max(0, (raw - hold) / (1 - hold));
     const dist = Math.max(0, track.scrollWidth - view.clientWidth);
     track.style.transform = 'translate3d(' + (-p * dist).toFixed(1) + 'px,0,0)';
     if (fill) fill.style.transform = 'scaleX(' + (0.5 + p * 0.5).toFixed(4) + ')';
@@ -1372,7 +1440,7 @@ class Component extends DCLogic {
       { n: '03', t: '永續經營', d: '追求企業永續成長，成為業界績優廠商。' },
     ];
     const timeline = [
-      { year: '1990', title: '從建築防水出發', desc: '寶鴻創立，投入建築防水材料與工程服務。' },
+      { year: '1993', title: '從建築防水出發', desc: '寶鴻創立，投入建築防水材料與工程服務。' },
       { year: '1998', title: '建立企業基礎', desc: '完成法人登記，逐步建立企業化營運架構。' },
       { year: '2000s', title: '材料 × 工法 × 施工', desc: '持續累積 EPOXY、PU、POLYUREA、壓克力、防水膜、彈性水泥、PVC 片膜、矽酸鹽砂漿及外牆塗料等工程經驗。' },
       { year: '2015', title: '從防水走向防水・防熱', desc: '公司名稱變更為「寶鴻防水防熱材料股份有限公司」，品牌服務範圍進一步延伸。' },
@@ -1452,8 +1520,13 @@ class Component extends DCLogic {
         { tag: '服務公告', text: '中元連假施工服務時間調整，急件搶修專線維持 24 小時待命。', date: '2024.08.12', bar: '#3f86c4', tagColor: '#2c6398', tagBg: '#e8f1fa', dotAnim: '' },
         { tag: '產品新訊', text: '新一代奈米級防水塗料正式上架，耐候性與附著力再升級。', date: '2024.06.30', bar: '#408a4b', tagColor: '#2f6e39', tagBg: '#e8f3ea', dotAnim: '' },
       ].map((u) => ({ ...u, go: go('blog', 2) })),
+      ddDistrict: this.makeDD('district', '選擇工程所在行政區', ['基隆市','台北市','新北市','桃園市','新竹市','新竹縣','苗栗縣','台中市','彰化縣','南投縣','雲林縣','嘉義市','嘉義縣','台南市','高雄市','屏東縣','宜蘭縣','花蓮縣','台東縣','澎湖縣','金門縣','連江縣']),
+      ddStage: this.makeDD('stage', '選擇目前工程階段', ['規劃中','詢價或報價中','施工中','已完工或使用中']),
+      noop: () => {},
+      inquirySent: !!this.state.inquirySent, submitInquiry: (e) => { e.preventDefault(); this.setState({ inquirySent: true }); },
       goHome: go('home', 0), goAbout: go('about', 3), goProjects: go('projects', 'all'), goCareer: go('career', 0), goContact: go('contact', 0),
       goUpdates: go('blog', 2),
+      whyGo1: go('about', 2), whyGo2: go('products', 0), whyGo3: go('projects', 'all'), whyGo4: go('about', 3), whyGo5: () => { this.go('contact', 0); setTimeout(() => { const f = document.querySelector('[data-inquiry]'); if (f) window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); }, 120); }, whyGo6: go('about', 0),
       goWaterproof: go('products', 0), goInsulation: go('products', 1), goCoating: go('products', 2), goFlooring: go('products', 3),
       pHome: page === 'home', pAbout: page === 'about', pProducts: page === 'products', pServices: page === 'services', pProjects: page === 'projects', pBlog: page === 'blog', pCareer: page === 'career', pContact: page === 'contact',
       projectCats, projFilterTabs, proj, homeProjects, projectCards, steps, procRef: this.procRef, videoRef: this.videoRef,
