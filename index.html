@@ -95,7 +95,7 @@
   <header data-header="" style="position:sticky; top:0; z-index:50; background:transparent; padding:14px 18px 8px;">
     <div style="position:relative; max-width:1280px; margin:0 auto; padding:13px 22px 13px 24px; display:flex; align-items:center; justify-content:space-between; gap:24px; border-radius:22px; background:rgba(255,255,255,0.10); backdrop-filter:blur(13px) saturate(175%); -webkit-backdrop-filter:blur(13px) saturate(175%); border:1px solid rgba(255,255,255,0.18); box-shadow:0 8px 30px rgba(16,40,60,0.10), inset 0 1px 1px rgba(255,255,255,0.45); transition:background .3s ease, box-shadow .3s ease;">
       <button onClick="{{ goHome }}" style="position:relative; z-index:1; display:flex; align-items:center; gap:12px;">
-        <img data-logo="" src="assets/logo_waterproof.png" alt="寶鴻防水防熱材料" style="height:46px; width:auto; display:block; filter:{{ logoFilter }};">
+        <img data-logo="" src="assets/logo_bh_nav2.png" alt="寶鴻防水防熱材料" style="height:46px; width:auto; display:block; filter:{{ logoFilter }};">
       </button>
       <nav style="position:relative; z-index:1; display:{{ deskNavDisplay }}; align-items:center; gap:4px;">
         <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
@@ -707,9 +707,9 @@
       <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:28px;">
         <sc-for list="{{ projectCards }}" as="p" hint-placeholder-count="4">
           <div style="border:1px solid #e6ecf0; border-radius:var(--radius,2px); overflow:hidden; transition:box-shadow .25s; {{ p.dim }}">
-            <div data-photo="{{ p.photo }}" style="aspect-ratio:16/10; background:repeating-linear-gradient(135deg,#e8eef3 0 14px,#dfe8ee 14px 28px); position:relative;">
+            <div data-photo="{{ p.photo }}" data-photo-upload="" style="aspect-ratio:16/10; background:repeating-linear-gradient(135deg,#e8eef3 0 14px,#dfe8ee 14px 28px); position:relative;">
               <span style="position:absolute; left:18px; top:16px; font-size:13px; font-weight:500; color:#fff; background:{{ p.color }}; padding:6px 14px; border-radius:999px;">{{ p.catLabel }}</span>
-              <span data-photo-label="" style="position:absolute; left:18px; bottom:14px; font-family:'Space Grotesk',monospace; font-size:11px; color:#8aa0b0; background:rgba(255,255,255,0.85); padding:4px 9px; border-radius:3px;">{{ p.photoName }}</span>
+              <span data-photo-label="" style="position:absolute; left:18px; bottom:14px; font-family:'Space Grotesk',monospace; font-size:11px; color:#5f7383; background:rgba(255,255,255,0.9); padding:4px 9px; border-radius:3px;">{{ p.photoName }}</span>
             </div>
             <div style="padding:30px 30px 34px;">
               <div style="font-size:13px; font-weight:600; color:{{ p.color }};">施工項目 · {{ p.method }}</div>
@@ -1169,7 +1169,15 @@ class Component extends DCLogic {
         const ov = el.querySelector('[data-photo-overlay]');
         if (ov) ov.style.opacity = '0';
       };
-      im.onerror = () => { if (el.getAttribute('data-photo-cur') === url) el.style.opacity = '1'; };
+      im.onerror = () => {
+        if (el.getAttribute('data-photo-cur') !== url) return;
+        el.style.opacity = '1';
+        if (el.hasAttribute('data-photo-upload')) {
+          el.style.backgroundImage = '';
+          const l = el.querySelector('[data-photo-label]');
+          if (l) l.style.display = '';
+        }
+      };
       im.src = url;
     });
   }
@@ -1288,8 +1296,8 @@ class Component extends DCLogic {
     const projData = [
       { catLabel: '公共工程', color: '#3f86c4', name: '民雄屋頂停車場', method: '防水聚脲', photo: 'assets/project-public.jpg',
         meta: [{ k: '地點', v: '嘉義' }, { k: '面積', v: '3,000 m²' }, { k: '年份', v: '2026' }] },
-      { catLabel: '科技廠辦', color: '#8c867e', name: '科技廠房無塵室地坪', method: '環氧樹脂地坪', photo: 'assets/project-tech.jpg',
-        meta: [{ k: '地點', v: '台南' }, { k: '面積', v: '5,200 m²' }, { k: '年份', v: '2025' }] },
+      { catLabel: '科技廠辦', color: '#8c867e', name: '翔越股份有限公司廠房', method: '清水模', photo: 'assets/projects/xiangyue.jpg',
+        meta: [{ k: '地點', v: '高雄' }, { k: '面積', v: '200 m²' }, { k: '年份', v: '2024' }] },
       { catLabel: '住宅', color: '#db864d', name: '集合住宅屋頂防水', method: 'XYPEX 滲透結晶', photo: 'assets/project-residential.jpg',
         meta: [{ k: '地點', v: '高雄' }, { k: '面積', v: '1,800 m²' }, { k: '年份', v: '2025' }] },
       { catLabel: '文教', color: '#408a4b', name: '校園外牆仿石塗裝', method: '日本菊水仿石塗料', photo: 'assets/project-education.jpg',
@@ -1311,7 +1319,26 @@ class Component extends DCLogic {
       const style = 'white-space:nowrap; font-size:14px; font-weight:500; cursor:pointer; padding:9px 18px; border-radius:999px; transition:all .2s; background:' + (active ? accent : '#fff') + '; color:' + (active ? '#fff' : '#56656f') + '; border:1px solid ' + (active ? accent : '#e0e7ec') + ';';
       return { label, style, onClick: () => this.setState({ projFilter: val }) };
     });
-    const projectCards = (pf === 'all' ? projData : projData.filter((p, i) => i === pf)).map((p) => ({ ...p, dim: '' }));
+    // Projects-page-only cases (homepage still uses projData above). cat: 0 公共工程 · 1 科技廠辦 · 2 住宅 · 3 文教
+    const catMeta = [['公共工程', '#3f86c4'], ['科技廠辦', '#8c867e'], ['住宅', '#db864d'], ['文教', '#408a4b']];
+    const extraProj = [
+      { cat: 0, name: '高雄市環保局 北鳳山區清潔中隊', method: '清水模', photo: 'assets/projects/zhengsan-beifeng.jpg', loc: '高雄', area: '300 m²', year: '2026' },
+      { cat: 1, name: '貿聯國際 台南廠', method: '晶化拋光地坪', photo: 'assets/projects/bizlink-polished.jpg', loc: '台南', area: '30,000 m²', year: '2025' },
+      { cat: 1, name: '貿聯國際 台南廠', method: '工業導電地坪', photo: 'assets/projects/bizlink-conductive.jpg', loc: '台南', area: '5,500 m²', year: '2025' },
+      { cat: 3, name: '高雄楠梓 楠陽國小', method: '外牆仿石漆', photo: 'assets/projects/nanyang-es.jpg', loc: '高雄', area: '2,700 m²', year: '2025' },
+      { cat: 2, name: '青砂段住宅', method: '外牆塗料及全面批土', photo: 'assets/projects/qingsha-residence.jpg', loc: '台南', area: '3,000 m²', year: '2025' },
+      { cat: 1, name: '天正國際精密機械', method: '廠房工程', photo: 'assets/projects/tianzheng.jpg', loc: '高雄', area: '10,000 m²', year: '2024' },
+      { cat: 3, name: '高雄市立旗津國民小學', method: '外牆仿石漆', photo: 'assets/projects/cijin-es.jpg', loc: '高雄', area: '1,400 m²', year: '2023' },
+      { cat: 0, name: '駁二 第一銀行', method: '外牆仿石塗料', photo: 'assets/projects/pier2-firstbank.jpg', loc: '高雄', area: '1,900 m²', year: '2023' },
+      { cat: 3, name: '高雄市立福山國民小學', method: '外牆拉皮', photo: 'assets/projects/fushan-es.jpg', loc: '高雄', area: '9,200 m²', year: '2021' },
+      { cat: 2, name: '屏東長治鄉建築師自宅', method: '外牆塗裝及打孔', photo: 'assets/projects/changzhi-house.jpg', loc: '屏東', area: '300 m²', year: '2021' },
+    ].map((p) => ({
+      cat: p.cat, catLabel: catMeta[p.cat][0], color: catMeta[p.cat][1], name: p.name, method: p.method,
+      photoName: p.photo.replace('assets/', ''), photo: this.resolveAsset(p.photo),
+      meta: [{ k: '地點', v: p.loc }, { k: '面積', v: p.area }, { k: '年份', v: p.year }],
+    }));
+    const allProj = projData.map((p, i) => ({ ...p, cat: i })).concat(extraProj);
+    const projectCards = (pf === 'all' ? allProj : allProj.filter((p) => p.cat === pf)).map((p) => ({ ...p, dim: '' }));
 
     // ---- PROCEDURE ----
     const stepTitles = ['工程及材料諮詢','現場實際狀況評估','提供報價及施作方式','確認報價進入送審','開始施工流程','進行初步驗收','後續品質保固'];
