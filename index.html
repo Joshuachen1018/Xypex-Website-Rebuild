@@ -362,6 +362,9 @@
             <div data-photo="{{ p.photo }}" style="width:100%; aspect-ratio:16/9; background:repeating-linear-gradient(135deg,#e8eef3 0 14px,#dfe8ee 14px 28px); position:relative;">
               <span data-photo-label="" style="position:absolute; left:18px; bottom:16px; font-family:'Space Grotesk',monospace; font-size:12px; letter-spacing:0.08em; color:#8aa0b0; background:rgba(255,255,255,0.85); padding:5px 10px; border-radius:3px;">{{ p.photoName }}</span>
               <span style="position:absolute; left:18px; top:16px; font-size:13px; font-weight:500; color:#fff; background:{{ p.color }}; padding:6px 14px; border-radius:999px;">{{ p.catLabel }}</span>
+              <sc-if value="{{ p.credit }}" hint-placeholder-val="{{ false }}">
+                <span style="position:absolute; right:12px; bottom:10px; font-size:11px; color:#fff; background:rgba(6,14,22,0.6); padding:3px 8px; border-radius:3px;">{{ p.credit }}</span>
+              </sc-if>
             </div>
             <div style="padding:26px 28px 28px; display:flex; flex-direction:column;">
               <div style="font-size:13px; font-weight:600; letter-spacing:0.04em; color:{{ p.color }};">施工項目 · {{ p.method }}</div>
@@ -707,9 +710,23 @@
       <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:28px;">
         <sc-for list="{{ projectCards }}" as="p" hint-placeholder-count="4">
           <div style="border:1px solid #e6ecf0; border-radius:var(--radius,2px); overflow:hidden; transition:box-shadow .25s; {{ p.dim }}">
-            <div data-photo="{{ p.photo }}" data-photo-upload="" style="aspect-ratio:16/10; background:repeating-linear-gradient(135deg,#e8eef3 0 14px,#dfe8ee 14px 28px); position:relative;">
+            <div data-photo="{{ p.photo }}" data-photo-upload="" data-photo-xfade="" style="aspect-ratio:16/10; background:repeating-linear-gradient(135deg,#e8eef3 0 14px,#dfe8ee 14px 28px); position:relative;">
               <span style="position:absolute; left:18px; top:16px; font-size:13px; font-weight:500; color:#fff; background:{{ p.color }}; padding:6px 14px; border-radius:999px;">{{ p.catLabel }}</span>
               <span data-photo-label="" style="position:absolute; left:18px; bottom:14px; font-family:'Space Grotesk',monospace; font-size:11px; color:#5f7383; background:rgba(255,255,255,0.9); padding:4px 9px; border-radius:3px;">{{ p.photoName }}</span>
+              <sc-if value="{{ p.isVideo }}" hint-placeholder-val="{{ false }}">
+                <video src="{{ p.videoSrc }}" poster="{{ p.photo }}" controls playsinline preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#0b1620; display:block;"></video>
+              </sc-if>
+              <sc-if value="{{ p.hasGallery }}" hint-placeholder-val="{{ false }}">
+                <button type="button" onClick="{{ p.galPrev }}" aria-label="{{ p.galPrevAria }}" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:999px; border:1px solid rgba(255,255,255,0.35); background:rgba(255,255,255,0.28); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 1px 6px rgba(6,14,22,0.18); filter:drop-shadow(0 1px 2px rgba(6,14,22,0.35));"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></button>
+                <button type="button" onClick="{{ p.galNext }}" aria-label="{{ p.galNextAria }}" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:999px; border:1px solid rgba(255,255,255,0.35); background:rgba(255,255,255,0.28); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 1px 6px rgba(6,14,22,0.18); filter:drop-shadow(0 1px 2px rgba(6,14,22,0.35));"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+                <sc-if value="{{ p.isBefore }}" hint-placeholder-val="{{ false }}">
+                  <span style="position:absolute; left:18px; top:54px; font-size:12px; font-weight:600; color:#fff; background:rgba(6,14,22,0.7); padding:4px 10px; border-radius:999px;">施工前</span>
+                </sc-if>
+                <span aria-live="polite" style="position:absolute; right:14px; top:16px; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; color:#fff; background:rgba(6,14,22,0.6); padding:4px 10px; border-radius:999px;">{{ p.galCount }}</span>
+              </sc-if>
+              <sc-if value="{{ p.credit }}" hint-placeholder-val="{{ false }}">
+                <a href="{{ p.creditUrl }}" target="_blank" rel="noopener noreferrer" style="position:absolute; right:12px; bottom:10px; font-size:11px; color:#fff; background:rgba(6,14,22,0.6); padding:3px 8px; border-radius:3px; text-decoration:none;">{{ p.credit }}</a>
+              </sc-if>
             </div>
             <div style="padding:30px 30px 34px;">
               <div style="font-size:13px; font-weight:600; color:{{ p.color }};">施工項目 · {{ p.method }}</div>
@@ -1155,10 +1172,23 @@ class Component extends DCLogic {
       if (!url || url === prev) return;
       el.setAttribute('data-photo-cur', url);
       const isChange = prev && prev !== url;
-      if (isChange) { el.style.transition = 'opacity .45s ease'; el.style.opacity = '0'; }
+      const xfade = isChange && el.hasAttribute('data-photo-xfade') && el.style.backgroundImage;
+      if (isChange && !xfade) { el.style.transition = 'opacity .45s ease'; el.style.opacity = '0'; }
       const im = new Image();
       im.onload = () => {
         if (el.getAttribute('data-photo-cur') !== url) return;
+        if (xfade) {
+          // Crossfade: lay the old photo on top, then fade it out over the new one.
+          el.querySelectorAll('[data-photo-ghost]').forEach((g) => g.remove());
+          const ghost = document.createElement('div');
+          ghost.setAttribute('data-photo-ghost', '');
+          ghost.setAttribute('aria-hidden', 'true');
+          ghost.style.cssText = 'position:absolute; inset:0; pointer-events:none; background-size:cover; background-position:center; background-repeat:no-repeat; opacity:1; transition:opacity .6s ease;';
+          ghost.style.backgroundImage = el.style.backgroundImage;
+          el.insertBefore(ghost, el.firstChild);
+          requestAnimationFrame(() => requestAnimationFrame(() => { ghost.style.opacity = '0'; }));
+          setTimeout(() => { if (ghost.parentNode) ghost.parentNode.removeChild(ghost); }, 700);
+        }
         el.style.backgroundImage = 'url("' + url + '")';
         el.style.backgroundSize = el.hasAttribute('data-photo-contain') ? 'contain' : 'cover';
         el.style.backgroundPosition = 'center';
@@ -1294,14 +1324,14 @@ class Component extends DCLogic {
 
     // ---- PROJECTS DATA ----
     const projData = [
-      { catLabel: '公共工程', color: '#3f86c4', name: '民雄屋頂停車場', method: '防水聚脲', photo: 'assets/project-public.jpg',
+      { catLabel: '公共工程', color: '#3f86c4', name: '民雄屋頂停車場', method: '防水聚脲', photo: 'assets/projects/minxiong-parking.jpg', credit: '圖片來源：scooptw.com', creditUrl: 'https://www.scooptw.com/local_news/549037/%E6%89%93%E8%B2%93%E6%96%B0%E5%9C%B0%E6%A8%99%E3%80%80%E6%B0%91%E9%9B%84%E9%84%89%E5%B8%82%E5%A0%B4%E6%9A%A8%E5%81%9C%E8%BB%8A%E5%A0%B4%E6%AD%A3%E5%BC%8F%E5%95%9F%E7%94%A8-2/',
         meta: [{ k: '地點', v: '嘉義' }, { k: '面積', v: '3,000 m²' }, { k: '年份', v: '2026' }] },
-      { catLabel: '科技廠辦', color: '#8c867e', name: '翔越股份有限公司廠房', method: '清水模', photo: 'assets/projects/xiangyue.jpg',
+      { catLabel: '科技廠辦', color: '#8c867e', name: '翔越股份有限公司廠房', method: '清水模', photo: 'assets/projects/xiangyue.jpg', gallery: ['assets/projects/xiangyue.jpg', 'assets/projects/xiangyue-2.jpg', 'assets/projects/xiangyue-3.jpg', 'assets/projects/xiangyue-4.jpg', 'assets/projects/xiangyue-5.jpg', 'assets/projects/xiangyue-6.jpg', 'assets/projects/xiangyue-7.jpg', 'assets/projects/xiangyue-8.jpg', 'assets/projects/xiangyue-9.jpg'],
         meta: [{ k: '地點', v: '高雄' }, { k: '面積', v: '200 m²' }, { k: '年份', v: '2024' }] },
       { catLabel: '住宅', color: '#db864d', name: '集合住宅屋頂防水', method: 'XYPEX 滲透結晶', photo: 'assets/project-residential.jpg',
         meta: [{ k: '地點', v: '高雄' }, { k: '面積', v: '1,800 m²' }, { k: '年份', v: '2025' }] },
-      { catLabel: '文教', color: '#408a4b', name: '校園外牆仿石塗裝', method: '日本菊水仿石塗料', photo: 'assets/project-education.jpg',
-        meta: [{ k: '地點', v: '屏東' }, { k: '面積', v: '2,400 m²' }, { k: '年份', v: '2024' }] },
+      { catLabel: '文教', color: '#408a4b', name: '高雄市立福山國民小學', method: '外牆拉皮', photo: 'assets/projects/fushan-es.jpg', gallery: ['assets/projects/fushan-es.jpg', 'assets/projects/fushan-2.jpg', 'assets/projects/fushan-3.jpg'],
+        meta: [{ k: '地點', v: '高雄' }, { k: '面積', v: '9,200 m²' }, { k: '年份', v: '2021' }] },
     ];
     projData.forEach((p) => { p.photoName = p.photo.replace('assets/', ''); p.photo = this.resolveAsset(p.photo); });
     const projectCats = projData.map((p, i) => {
@@ -1322,22 +1352,50 @@ class Component extends DCLogic {
     // Projects-page-only cases (homepage still uses projData above). cat: 0 公共工程 · 1 科技廠辦 · 2 住宅 · 3 文教
     const catMeta = [['公共工程', '#3f86c4'], ['科技廠辦', '#8c867e'], ['住宅', '#db864d'], ['文教', '#408a4b']];
     const extraProj = [
-      { cat: 0, name: '高雄市環保局 北鳳山區清潔中隊', method: '清水模', photo: 'assets/projects/zhengsan-beifeng.jpg', loc: '高雄', area: '300 m²', year: '2026' },
-      { cat: 1, name: '貿聯國際 台南廠', method: '晶化拋光地坪', photo: 'assets/projects/bizlink-polished.jpg', loc: '台南', area: '30,000 m²', year: '2025' },
-      { cat: 1, name: '貿聯國際 台南廠', method: '工業導電地坪', photo: 'assets/projects/bizlink-conductive.jpg', loc: '台南', area: '5,500 m²', year: '2025' },
-      { cat: 3, name: '高雄楠梓 楠陽國小', method: '外牆仿石漆', photo: 'assets/projects/nanyang-es.jpg', loc: '高雄', area: '2,700 m²', year: '2025' },
-      { cat: 2, name: '青砂段住宅', method: '外牆塗料及全面批土', photo: 'assets/projects/qingsha-residence.jpg', loc: '台南', area: '3,000 m²', year: '2025' },
-      { cat: 1, name: '天正國際精密機械', method: '廠房工程', photo: 'assets/projects/tianzheng.jpg', loc: '高雄', area: '10,000 m²', year: '2024' },
-      { cat: 3, name: '高雄市立旗津國民小學', method: '外牆仿石漆', photo: 'assets/projects/cijin-es.jpg', loc: '高雄', area: '1,400 m²', year: '2023' },
-      { cat: 0, name: '駁二 第一銀行', method: '外牆仿石塗料', photo: 'assets/projects/pier2-firstbank.jpg', loc: '高雄', area: '1,900 m²', year: '2023' },
-      { cat: 3, name: '高雄市立福山國民小學', method: '外牆拉皮', photo: 'assets/projects/fushan-es.jpg', loc: '高雄', area: '9,200 m²', year: '2021' },
-      { cat: 2, name: '屏東長治鄉建築師自宅', method: '外牆塗裝及打孔', photo: 'assets/projects/changzhi-house.jpg', loc: '屏東', area: '300 m²', year: '2021' },
-    ].map((p) => ({
-      cat: p.cat, catLabel: catMeta[p.cat][0], color: catMeta[p.cat][1], name: p.name, method: p.method,
-      photoName: p.photo.replace('assets/', ''), photo: this.resolveAsset(p.photo),
-      meta: [{ k: '地點', v: p.loc }, { k: '面積', v: p.area }, { k: '年份', v: p.year }],
-    }));
-    const allProj = projData.map((p, i) => ({ ...p, cat: i })).concat(extraProj);
+      { cat: 0, name: '高雄市環保局 北鳳山區清潔中隊', method: '清水模', photo: 'assets/projects/zhengsan-beifeng.jpg', gallery: ['assets/projects/zhengsan-beifeng.jpg', 'assets/projects/beifeng-2.jpg', 'assets/projects/beifeng-3.jpg', 'assets/projects/beifeng-4.jpg', 'assets/projects/beifeng-5.jpg', 'assets/projects/beifeng-6.jpg', 'assets/projects/beifeng-7.jpg', 'assets/projects/beifeng-8.jpg', 'assets/projects/beifeng-9.jpg', 'assets/projects/beifeng-10.jpg', 'assets/projects/beifeng-11.jpg'], loc: '高雄', area: '300 m²', year: '2026' },
+      { cat: 1, name: '貿聯國際 台南廠', method: '晶化拋光地坪', photo: 'assets/projects/bizlink-exterior.jpg', gallery: ['assets/projects/bizlink-exterior.jpg', 'assets/projects/bizlink-polished-2.jpg', 'assets/projects/bizlink-polished-3.jpg', 'assets/projects/bizlink-polished-4.jpg', 'assets/projects/bizlink-polished-5.jpg', 'assets/projects/bizlink-polished-6.jpg', 'assets/projects/bizlink-polished-7.jpg', 'assets/projects/bizlink-polished-8.jpg'], loc: '台南', area: '30,000 m²', year: '2025' },
+      { cat: 1, name: '貿聯國際 台南廠', method: '工業導電地坪', photo: 'assets/projects/bizlink-conductive-cover.jpg', gallery: ['assets/projects/bizlink-conductive-cover.jpg', 'assets/projects/bizlink-conductive.jpg', 'assets/projects/bizlink-conductive-2.jpg', 'assets/projects/bizlink-conductive-3.jpg', 'assets/projects/bizlink-conductive-4.jpg'], loc: '台南', area: '5,500 m²', year: '2025' },
+      { cat: 3, name: '高雄楠梓 楠陽國小', method: '外牆仿石漆', photo: 'assets/projects/nanyang-es.jpg', credit: '圖片來源：ncd.kcg.gov.tw', creditUrl: 'https://ncd.kcg.gov.tw/News_Content.aspx?n=48125E3D0651CC03&sms=D44EED26810F2D99&s=92610606F5D36059', gallery: ['assets/projects/nanyang-es.jpg', 'assets/projects/nanyang-2.jpg', 'assets/projects/nanyang-3.jpg', 'assets/projects/nanyang-4.jpg', 'assets/projects/nanyang-5.jpg', 'assets/projects/nanyang-6.jpg', 'assets/projects/nanyang-7.jpg', 'assets/projects/nanyang-8.jpg'], loc: '高雄', area: '2,700 m²', year: '2025' },
+      { cat: 2, name: '青砂段住宅', method: '外牆塗料及全面批土', photo: 'assets/projects/qingsha-residence.jpg', gallery: ['assets/projects/qingsha-residence.jpg', 'assets/projects/qingsha-2.jpg', 'assets/projects/qingsha-3.jpg', 'assets/projects/qingsha-4.jpg'], loc: '台南', area: '3,000 m²', year: '2025' },
+      { cat: 1, name: '天正國際精密機械', method: '廠房工程', photo: 'assets/projects/tianzheng.jpg', gallery: ['assets/projects/tianzheng.jpg', 'assets/projects/tianzheng-2.jpg', 'assets/projects/tianzheng-3.jpg', 'assets/projects/tianzheng-4.jpg', 'assets/projects/tianzheng-5.jpg', 'assets/projects/tianzheng-6.jpg', 'assets/projects/tianzheng-7.jpg', 'assets/projects/tianzheng-8.jpg', 'assets/projects/tianzheng-9.jpg', 'assets/projects/tianzheng-10.jpg', 'assets/projects/tianzheng-11.jpg', 'assets/projects/tianzheng-12.jpg', 'assets/projects/tianzheng-13.jpg', 'assets/projects/tianzheng-14.jpg', 'assets/projects/tianzheng-video.mp4'], loc: '高雄', area: '10,000 m²', year: '2024' },
+      { cat: 3, name: '高雄市立旗津國民小學', method: '外牆仿石漆', photo: 'assets/projects/cijin-es.jpg', gallery: ['assets/projects/cijin-es.jpg', 'assets/projects/cijin-2.jpg', 'assets/projects/cijin-3.jpg', 'assets/projects/cijin-4.jpg', 'assets/projects/cijin-5.jpg', 'assets/projects/cijin-6.jpg', 'assets/projects/cijin-7.jpg'], loc: '高雄', area: '1,400 m²', year: '2023' },
+      { cat: 0, name: '駁二 第一銀行', method: '外牆仿石塗料', photo: 'assets/projects/pier2-firstbank.jpg', gallery: ['assets/projects/pier2-firstbank.jpg', 'assets/projects/pier2-2.jpg', 'assets/projects/pier2-3.jpg'], loc: '高雄', area: '1,900 m²', year: '2023' },
+      { cat: 2, name: '屏東長治鄉建築師自宅', method: '外牆塗裝及打孔', photo: 'assets/projects/changzhi-house.jpg', gallery: ['assets/projects/changzhi-house.jpg', 'assets/projects/changzhi-1b.jpg', 'assets/projects/changzhi-2.jpg', 'assets/projects/changzhi-3.jpg', 'assets/projects/changzhi-4.jpg', 'assets/projects/changzhi-5.jpg', 'assets/projects/changzhi-6.jpg', 'assets/projects/changzhi-7.jpg'], loc: '屏東', area: '300 m²', year: '2021' },
+    ].map((p) => {
+      const g = p.gallery || null;
+      const n = g ? g.length : 0;
+      const gi = g ? (((this.state.gal || {})[p.photo] || 0) % n + n) % n : 0;
+      const item = g ? g[gi] : p.photo;
+      const isVideo = /\.mp4$/i.test(item);
+      const src = isVideo ? item.replace(/\.mp4$/i, '-poster.jpg') : item;
+      const step = (d) => () => this.setState({ gal: { ...(this.state.gal || {}), [p.photo]: gi + d } });
+      return {
+        cat: p.cat, catLabel: catMeta[p.cat][0], color: catMeta[p.cat][1], name: p.name, method: p.method,
+        photoName: src.replace('assets/', ''), photo: this.resolveAsset(src),
+        meta: [{ k: '地點', v: p.loc }, { k: '面積', v: p.area }, { k: '年份', v: p.year }],
+        credit: (p.credit && gi === 0) ? p.credit : '', creditUrl: p.creditUrl || '',
+        isVideo, videoSrc: isVideo ? this.resolveAsset(item) : '',
+        hasGallery: n > 1, galCount: (gi + 1) + ' / ' + n,
+        isBefore: !!(p.afterCount && gi >= p.afterCount),
+        galPrev: step(-1), galNext: step(1),
+        galPrevAria: p.name + '：上一張照片', galNextAria: p.name + '：下一張照片',
+      };
+    });
+    const allProj = projData.map((p, i) => {
+      const card = { ...p, cat: i };
+      const g = p.gallery;
+      if (!g || g.length < 2) return card;
+      // Projects-page gallery for a homepage project (homepage keeps showing the cover).
+      const n = g.length;
+      const key = g[0];
+      const gi = (((this.state.gal || {})[key] || 0) % n + n) % n;
+      const step = (d) => () => this.setState({ gal: { ...(this.state.gal || {}), [key]: gi + d } });
+      return { ...card,
+        photo: this.resolveAsset(g[gi]), photoName: g[gi].replace('assets/', ''),
+        credit: gi === 0 ? (p.credit || '') : '',
+        hasGallery: true, galCount: (gi + 1) + ' / ' + n, galPrev: step(-1), galNext: step(1),
+        galPrevAria: p.name + '：上一張照片', galNextAria: p.name + '：下一張照片' };
+    }).concat(extraProj);
     const projectCards = (pf === 'all' ? allProj : allProj.filter((p) => p.cat === pf)).map((p) => ({ ...p, dim: '' }));
 
     // ---- PROCEDURE ----
