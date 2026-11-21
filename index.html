@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant-TW">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>寶鴻防水</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -613,7 +616,7 @@
           <div style="border:1px solid #e6ecf0; border-radius:var(--radius,2px); overflow:hidden; transition:box-shadow .25s;" style-hover="box-shadow:0 18px 44px rgba(16,40,60,0.09);">
             <div data-photo="{{ p.img }}" style="aspect-ratio:4/3; background:repeating-linear-gradient(135deg,#eef3f7 0 12px,#e6eef4 12px 24px); position:relative;">
               <span style="position:absolute; left:14px; top:12px; width:34px; height:6px; border-radius:3px; background:{{ productActive.color }}; z-index:1;"></span>
-              <span data-photo-label="" style="position:absolute; left:14px; bottom:12px; font-family:'Space Grotesk',monospace; font-size:11px; color:#8aa0b0; background:rgba(255,255,255,0.85); padding:4px 8px; border-radius:3px;">{{ p.imgName }}</span>
+              <span data-photo-label="" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:18px; text-align:center; background:rgba(246,249,251,0.78);"><span style="font-size:17px; font-weight:800; color:#3a4955; letter-spacing:0.04em;">籌備中</span><span style="max-width:22em; font-size:13px; line-height:1.8; color:#67757f;">我們正細心整理產品特色與施工應用，完整內容將陸續呈現。</span></span>
             </div>
             <div style="padding:22px 22px 26px;">
               <div style="font-size:18px; font-weight:700; color:#14202b; line-height:1.4;">{{ p.title }}</div>
@@ -668,41 +671,14 @@
       <div style="display:grid; grid-template-columns:1fr 320px; gap:56px; align-items:start;">
         <div>
           <div data-photo="{{ serviceActive.img }}" style="aspect-ratio:16/9; width:100%; border-radius:var(--radius,2px); background:repeating-linear-gradient(135deg,#eef3f7 0 14px,#e6eef4 14px 28px); border:1px solid #e3eaef; position:relative;">
-            <span data-photo-label="" style="position:absolute; left:18px; bottom:16px; font-family:'Space Grotesk',monospace; font-size:12px; letter-spacing:0.08em; color:#8aa0b0; background:rgba(255,255,255,0.85); padding:5px 10px; border-radius:3px;">{{ serviceActive.imgName }}</span>
+            <span data-photo-label="" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:24px; text-align:center; background:rgba(246,249,251,0.78);"><span style="font-size:clamp(18px,2vw,24px); font-weight:800; color:#3a4955; letter-spacing:0.04em;">籌備中</span><span style="max-width:22em; font-size:clamp(13px,1.3vw,15px); line-height:1.8; color:#67757f;">我們正細心整理產品特色與施工應用，完整內容將陸續呈現。</span></span>
           </div>
           <p style="margin-top:36px; font-size:18px; line-height:2.05; color:#3a4955;">{{ serviceActive.desc }}</p>
-
-          <div style="margin-top:52px;">
-            <div style="display:flex; align-items:center; gap:14px; margin-bottom:22px;">
-              <span style="width:34px; height:2px; background:var(--accent,#3f86c4); display:block;"></span>
-              <span style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent,#3f86c4);">服務說明</span>
-            </div>
-            <p style="font-size:16px; line-height:2.1; color:#56656f;">（請於此處填入此服務的詳細說明，包含適用場域、材料特性與施工方式等內容。）</p>
-            <p style="margin-top:18px; font-size:16px; line-height:2.1; color:#56656f;">（可補充第二段說明文字，例如工法流程、品質保固或施工注意事項。）</p>
-          </div>
-
-          <div style="margin-top:52px;">
-            <div style="display:flex; align-items:center; gap:14px; margin-bottom:22px;">
-              <span style="width:34px; height:2px; background:var(--accent,#3f86c4); display:block;"></span>
-              <span style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent,#3f86c4);">服務特點</span>
-            </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-              <sc-for list="{{ serviceActive.points }}" as="pt" hint-placeholder-count="4">
-                <div style="display:flex; gap:14px; align-items:flex-start; padding:22px 24px; background:#f6f9fb; border:1px solid #eaeff3; border-radius:var(--radius,2px);">
-                  <span style="width:8px; height:8px; border-radius:50%; background:var(--accent,#3f86c4); flex:none; margin-top:8px;"></span>
-                  <div>
-                    <div style="font-size:16px; font-weight:700; color:#14202b;">{{ pt.t }}</div>
-                    <div style="margin-top:6px; font-size:13px; line-height:1.8; color:#8696a2;">{{ pt.d }}</div>
-                  </div>
-                </div>
-              </sc-for>
-            </div>
-          </div>
 
           <div style="margin-top:52px; display:grid; grid-template-columns:1fr 1fr; gap:18px;">
             <sc-for list="{{ serviceActive.gallery }}" as="g" hint-placeholder-count="2">
               <div data-photo="{{ g.img }}" style="aspect-ratio:4/3; width:100%; border-radius:var(--radius,2px); background:repeating-linear-gradient(135deg,#eef3f7 0 12px,#e6eef4 12px 24px); border:1px solid #e3eaef; position:relative;">
-                <span data-photo-label="" style="position:absolute; left:14px; bottom:12px; font-family:'Space Grotesk',monospace; font-size:11px; color:#8aa0b0; background:rgba(255,255,255,0.85); padding:4px 8px; border-radius:3px;">{{ g.name }}</span>
+                <span data-photo-label="" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:12px; text-align:center; background:rgba(246,249,251,0.78);"><span style="font-size:14px; font-weight:800; color:#3a4955; letter-spacing:0.04em;">籌備中</span><span style="max-width:22em; font-size:12px; line-height:1.8; color:#67757f;">我們正細心整理產品特色與施工應用，完整內容將陸續呈現。</span></span>
               </div>
             </sc-for>
           </div>
@@ -1476,7 +1452,7 @@ class Component extends DCLogic {
       ] },
       { name: '塗料產品', en: 'Coatings', color: '#8c867e', logo: 'assets/logo_paint.png', items: [
         { title: '日本菊水外牆仿石塗料', desc: '仿石質感塗裝，色澤自然，耐候保色。' },
-        { title: '日本菊水後製清水模', desc: '後製仿清水模工法，重現建築原始混凝土質感。' },
+        { title: '後製清水模', desc: '後製仿清水模工法，重現建築原始混凝土質感。' },
         { title: '外牆仿石綠建材低碳塗料', desc: '低碳足跡綠建材，兼顧美觀與環境永續。' },
       ] },
       { name: '地床產品', en: 'Flooring', color: '#db864d', logo: 'assets/logo_flooring.png', items: [
@@ -1543,7 +1519,7 @@ class Component extends DCLogic {
       ['01', 'XYPEX 賽柏斯滲透結晶材', '混凝土滲透結晶防水，遇水自癒修補裂縫，達永久性防水保護。'],
       ['02', '鐵克膜全尿素聚脂防水材', '高彈性聚脲塗膜，耐磨耐候，適用各式屋頂與構造防水。'],
       ['03', 'RCB 鎂虹巢板（日本輕石斷熱板）', '輕量斷熱板材，降低熱傳導，提升建築節能效益。'],
-      ['04', '日本菊水後製清水模', '後製仿清水模工法，重現建築原始質感。'],
+      ['04', '後製清水模', '後製仿清水模工法，重現建築原始質感。'],
       ['05', '屋頂外牆法規斷熱值計算', '依法規進行斷熱值評估，提供合規節能方案。'],
       ['06', '外牆仿石綠建材及低碳足跡塗料', '低碳綠建材塗裝，兼顧美觀、耐候與環境永續。'],
       ['07', '工業地坪專業施工', '耐酸鹼／食品級／導電／無塵室／拋光／環氧樹脂地坪。'],
