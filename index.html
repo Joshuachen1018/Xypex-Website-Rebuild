@@ -29,7 +29,9 @@
   button:active { transform: translateY(0); }
   header[data-header] nav button, header[data-header] button[aria-label] { transition: background-color .25s ease, box-shadow .25s ease, transform .2s ease !important; }
   main { margin-top: -96px; }
-  header[data-scrolled="1"] > div:first-of-type { background: rgba(255,255,255,0.16) !important; box-shadow: 0 10px 34px rgba(16,40,60,0.14), inset 0 1px 1px rgba(255,255,255,0.55) !important; }
+  header[data-scrolled="1"][data-theme="dark"] > div:first-of-type { background: rgba(14,26,38,0.38) !important; }
+  header[data-scrolled="1"][data-theme="light"] > div:first-of-type { background: rgba(255,255,255,0.62) !important; }
+  header[data-scrolled="1"] > div:first-of-type { background: rgba(255,255,255,0.16); box-shadow: 0 10px 34px rgba(16,40,60,0.14), inset 0 1px 1px rgba(255,255,255,0.55) !important; }
 
   input, textarea { transition: border-color .18s ease, box-shadow .18s ease; }
   input:focus, textarea:focus { border-color: var(--accent,#3f86c4); box-shadow: 0 0 0 3px var(--accent-soft,#eaf2f9); }
@@ -52,6 +54,31 @@
     footer { text-align: center !important; }
     footer [data-footgroup] { width: max-content !important; max-width: 100% !important; margin-left: auto !important; margin-right: auto !important; text-align: left !important; }
     footer [style*="justify-content: space-between"] { justify-content: center !important; }
+    /* latest updates header: label line, title on its own line */
+    [data-upd-head] { flex-wrap: wrap !important; row-gap: 8px !important; }
+    [data-upd-head] h3 { flex-basis: 100%; font-size: 20px !important; }
+    /* product showcase: title above image, category buttons below */
+    [data-showcase] { padding: 64px 20px !important; }
+    [data-sc-box] { aspect-ratio: 4 / 3 !important; }
+    [data-sc-title], [data-sc-cats] { display: none !important; }
+    [data-sc-mtitle] { display: block !important; }
+    [data-sc-mcats] { display: grid !important; }
+    [data-sc-label] { padding: 6px 10px !important; border-radius: 9px !important; }
+    [data-sc-label] > span:first-child { font-size: 13px !important; }
+    [data-sc-label] > span:last-child { display: none !important; }
+    /* home project cards: one per row */
+    [data-home-proj] { grid-template-columns: 1fr !important; gap: 20px !important; }
+    [data-home-proj] > button > div:last-child { padding: 22px 22px 24px !important; }
+    /* why baohong: one large card at a time */
+    [data-why-track] { gap: 16px !important; }
+    [data-why-track] > div { flex: 0 0 82% !important; height: min(56vh, 460px) !important; }
+    [data-why-track] > div > div:nth-child(3) { left: 22px !important; bottom: 66px !important; font-size: 40px !important; }
+    [data-why-track] > div > div:nth-child(4) { left: 22px !important; right: 22px !important; bottom: 22px !important; font-size: 21px !important; }
+    /* contact form */
+    form[data-inquiry] { padding: 24px 20px !important; }
+    /* footer: info full width, sitemap + follow us side by side */
+    footer [data-footgrid] { grid-template-columns: 1fr 1fr !important; gap: 44px 16px !important; }
+    footer [data-footgrid] > div:first-child { grid-column: 1 / -1; }
   }
 [data-inquiry] input::placeholder, [data-inquiry] textarea::placeholder { color:#8a99a5; opacity:1; }
 </style>
@@ -118,10 +145,10 @@
       </div>
     </div>
     <div style="display:{{ mobMenuDisplay }}; position:absolute; left:0; right:0; top:100%; z-index:49; overflow:hidden; max-height:{{ mobMenuMax }}; opacity:{{ mobMenuOpacity }}; pointer-events:{{ mobMenuPointer }}; transition:max-height .34s cubic-bezier(.4,0,.2,1), opacity .26s ease; padding:0 18px;">
-      <div style="max-width:1280px; margin:10px auto 0; padding:8px 18px 20px; border-radius:22px; background:rgba(255,255,255,0.10); backdrop-filter:blur(15px) saturate(175%); -webkit-backdrop-filter:blur(15px) saturate(175%); border:1px solid rgba(255,255,255,0.18); box-shadow:0 12px 34px rgba(16,40,60,0.16), inset 0 1px 1px rgba(255,255,255,0.45);">
+      <div data-mobpanel="" style="max-width:1280px; margin:10px auto 0; padding:8px 18px 20px; border-radius:22px; background:{{ mobPanelBg }}; backdrop-filter:blur(15px) saturate(175%); -webkit-backdrop-filter:blur(15px) saturate(175%); border:1px solid rgba(255,255,255,0.18); box-shadow:0 12px 34px rgba(16,40,60,0.16), inset 0 1px 1px rgba(255,255,255,0.45);">
       <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
-        <div style="border-bottom:1px solid rgba(255,255,255,0.14);">
-          <button onClick="{{ item.onClick }}" style="display:block; width:100%; text-align:left; padding:16px 8px; font-size:18px; font-weight:600; color:{{ mobIconColor }}; text-shadow:{{ mobMenuShadow }}; border-radius:12px; transition:background .2s ease;" style-hover="background:rgba(255,255,255,0.14);">{{ item.label }}</button>
+        <div style="border-bottom:1px solid {{ mobDivider }};">
+          <button onClick="{{ item.onClick }}" style="display:block; width:100%; text-align:left; padding:16px 8px; font-size:18px; font-weight:600; color:{{ mobItemColor }}; text-shadow:{{ mobItemShadow }}; border-radius:12px; transition:background .2s ease;" style-hover="background:rgba(255,255,255,0.14);">{{ item.label }}</button>
         </div>
       </sc-for>
       <button onClick="{{ goContact }}" style="display:block; width:100%; text-align:center; margin-top:18px; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#fff; background:var(--accent,#3f86c4); padding:15px 22px; border-radius:var(--radius,2px);" style-hover="background:var(--accent-deep,#2c6398);">聯絡我們</button>
@@ -175,7 +202,7 @@
     <section style="background:#f6f9fb; border-bottom:1px solid #eef0ec;">
       <div style="max-width:1280px; margin:0 auto; padding:34px 40px 38px;">
         <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:22px;">
-          <div style="display:flex; align-items:center; gap:13px;">
+          <div data-upd-head="" style="display:flex; align-items:center; gap:13px;">
             <span style="width:32px; height:2px; background:#e8772e; display:block;"></span>
             <span style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:#c46a2a;">Latest Updates</span>
             <h3 style="font-size:18px; font-weight:800; color:#14202b; letter-spacing:0.01em;">最新消息與防汛通報</h3>
@@ -289,15 +316,22 @@
     </section>
 
     <!-- PRODUCT SHOWCASE (category switcher) -->
-    <section style="max-width:1280px; margin:0 auto; padding:100px 40px;">
-      <div style="position:relative; width:100%; aspect-ratio:3/2; border:1px solid #e6ecf0; border-radius:var(--radius,2px); overflow:hidden; background:#0b1620;">
+    <section data-showcase="" style="max-width:1280px; margin:0 auto; padding:100px 40px;">
+      <div data-sc-mtitle="" style="display:none; margin-bottom:22px;">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
+          <span style="width:34px; height:2px; background:var(--accent,#3f86c4); display:block;"></span>
+          <span style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent,#3f86c4);">Application — 產品應用實景</span>
+        </div>
+        <h2 style="font-size:28px; font-weight:900; letter-spacing:-0.01em; color:#14202b;">四大產品應用實景</h2>
+      </div>
+      <div data-sc-box="" style="position:relative; width:100%; aspect-ratio:3/2; border:1px solid #e6ecf0; border-radius:var(--radius,2px); overflow:hidden; background:#0b1620;">
         <sc-for list="{{ showcaseLayers }}" as="l">
           <img src="{{ l.src }}" alt="" style="{{ l.style }}"/>
         </sc-for>
         <div style="position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(6,14,22,0.58) 0%,rgba(6,14,22,0) 26%,rgba(6,14,22,0) 54%,rgba(6,14,22,0.62) 100%);"></div>
 
         <!-- section title overlapping the image -->
-        <div style="position:absolute; left:0; top:0; padding:clamp(22px,3vw,42px); max-width:66%; pointer-events:none; display:flex; gap:clamp(14px,1.6vw,22px);">
+        <div data-sc-title="" style="position:absolute; left:0; top:0; padding:clamp(22px,3vw,42px); max-width:66%; pointer-events:none; display:flex; gap:clamp(14px,1.6vw,22px);">
           <span style="flex:none; width:3px; align-self:stretch; background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,0.15) 100%); display:block;"></span>
           <div>
             <div style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
@@ -317,14 +351,14 @@
           <line x1="{{ showcasePointer.x2 }}" y1="{{ showcasePointer.y2 }}" x2="{{ showcasePointer.x1 }}" y2="{{ showcasePointer.y1 }}" stroke="{{ showcasePointer.color }}" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
         </svg>
         <div style="{{ showcasePointer.dotOuter }}"><span style="{{ showcasePointer.dotInner }}"></span></div>
-        <div style="{{ showcasePointer.labelStyle }}">
+        <div data-sc-label="" style="{{ showcasePointer.labelStyle }}">
           <span style="font-size:15px; font-weight:800; color:#fff; letter-spacing:0.02em;">{{ showcasePointer.zh }}</span>
           <span style="font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:#fff; opacity:0.7;">{{ showcasePointer.en }}</span>
         </div>
         </sc-for>
 
         <!-- category selection overlapping the bottom of the image -->
-        <div style="position:absolute; left:0; right:0; bottom:0; z-index:4; padding:clamp(20px,2.4vw,30px) clamp(20px,2.4vw,30px) clamp(20px,2.4vw,28px); display:flex; flex-wrap:wrap; gap:10px; justify-content:center; background:linear-gradient(180deg,rgba(6,14,22,0) 0%,rgba(6,14,22,0.55) 55%,rgba(6,14,22,0.72) 100%);">
+        <div data-sc-cats="" style="position:absolute; left:0; right:0; bottom:0; z-index:4; padding:clamp(20px,2.4vw,30px) clamp(20px,2.4vw,30px) clamp(20px,2.4vw,28px); display:flex; flex-wrap:wrap; gap:10px; justify-content:center; background:linear-gradient(180deg,rgba(6,14,22,0) 0%,rgba(6,14,22,0.55) 55%,rgba(6,14,22,0.72) 100%);">
           <sc-for list="{{ showcaseCats }}" as="c" hint-placeholder-count="4">
             <button onClick="{{ c.onClick }}" style="{{ c.style }}">
               <span style="{{ c.dotStyle }}"></span>
@@ -332,6 +366,14 @@
             </button>
           </sc-for>
         </div>
+      </div>
+      <div data-sc-mcats="" style="display:none; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:14px;">
+        <sc-for list="{{ showcaseCats }}" as="c" hint-placeholder-count="4">
+          <button type="button" onClick="{{ c.onClick }}" style="{{ c.mStyle }}">
+            <span style="{{ c.dotStyle }}"></span>
+            <span>{{ c.name }}</span>
+          </button>
+        </sc-for>
       </div>
     </section>
 
@@ -356,7 +398,7 @@
         </div>
         <button onClick="{{ goProjects }}" style="display:inline-flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent,#3f86c4);">View All →</button>
       </div>
-      <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px;">
+      <div data-home-proj="" style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px;">
         <sc-for list="{{ homeProjects }}" as="p" hint-placeholder-count="4">
           <button onClick="{{ p.onClick }}" style="display:flex; flex-direction:column; width:100%; text-align:left; background:#fff; border:1px solid #e6ecf0; border-radius:var(--radius,2px); overflow:hidden; transition:box-shadow .25s, transform .25s;" style-hover="box-shadow:0 24px 60px rgba(16,40,60,0.10); transform:translateY(-3px);">
             <div data-photo="{{ p.photo }}" style="width:100%; aspect-ratio:16/9; background:repeating-linear-gradient(135deg,#e8eef3 0 14px,#dfe8ee 14px 28px); position:relative;">
@@ -911,7 +953,7 @@
   <!-- ============ FOOTER ============ -->
   <footer data-dark-bg="" style="background:#13202b; color:#c7d3dc;">
     <div style="max-width:1280px; margin:0 auto; padding:78px 40px 40px;">
-      <div style="display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:56px; padding-bottom:54px; border-bottom:1px solid #233340;">
+      <div data-footgrid="" style="display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:56px; padding-bottom:54px; border-bottom:1px solid #233340;">
         <div>
           <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:#7d8e9b; margin-bottom:22px;">INFO</div>
           <div data-footgroup="" style="margin-top:28px; display:flex; flex-direction:column; gap:16px;">
@@ -1087,6 +1129,21 @@ class Component extends DCLogic {
       });
       hd.setAttribute('data-theme', dark ? 'dark' : 'light');
       if (dark !== this.state.headerDark) this.setState({ headerDark: dark });
+      // what sits behind the open mobile menu panel (it reaches far below the header)
+      const mp = hd.querySelector('[data-mobpanel]');
+      let mdark = dark;
+      if (mp) {
+        const mr = mp.getBoundingClientRect();
+        if (mr.height > 0) {
+          let cover = 0;
+          document.querySelectorAll('[data-dark-bg]').forEach((el) => {
+            const r = el.getBoundingClientRect();
+            cover += Math.max(0, Math.min(r.bottom, mr.bottom) - Math.max(r.top, mr.top));
+          });
+          mdark = cover > mr.height * 0.4;
+        }
+      }
+      if (mdark !== this.state.menuDark) this.setState({ menuDark: mdark });
     };
     window.addEventListener('scroll', this._onScroll, { passive: true });
     this._onScroll();
@@ -1150,7 +1207,7 @@ class Component extends DCLogic {
     track.style.transform = 'translate3d(' + (-p * dist).toFixed(1) + 'px,0,0)';
     if (fill) fill.style.transform = 'scaleX(' + (0.5 + p * 0.5).toFixed(4) + ')';
     const cnt = sec.querySelector('[data-why-count]');
-    if (cnt) { const s = Math.round(p * 3) + 1; const t = '0' + s + '–0' + (s + 2); if (cnt.textContent !== t) cnt.textContent = t; }
+    if (cnt) { const mob = window.innerWidth < 768; const s = Math.round(p * (mob ? 5 : 3)) + 1; const t = mob ? '0' + s : '0' + s + '–0' + (s + 2); if (cnt.textContent !== t) cnt.textContent = t; }
   }
 
   revealTick() {
@@ -1251,7 +1308,7 @@ class Component extends DCLogic {
     });
   }
 
-  toggleMobileNav = () => { this.setState((st) => ({ mobileNavOpen: !st.mobileNavOpen })); };
+  toggleMobileNav = () => { this.setState((st) => ({ mobileNavOpen: !st.mobileNavOpen })); [60, 200, 380].forEach((t) => setTimeout(() => { if (this._onScroll) this._onScroll(); }, t)); };
 
   go(page, tab) {
     const s = { page, openMenu: null, serviceView: null, mobileNavOpen: false };
@@ -1455,7 +1512,8 @@ class Component extends DCLogic {
       const active = i === scTab;
       const style = 'display:inline-flex; align-items:center; gap:9px; cursor:pointer; white-space:nowrap; padding:11px 20px; border-radius:999px; font-size:14px; font-weight:600; transition:all .2s; ' + (active ? 'background:' + accent + '; color:#fff; border:1px solid ' + accent + '; box-shadow:0 10px 26px rgba(0,0,0,0.30);' : 'background:rgba(255,255,255,0.16); color:#fff; border:1px solid rgba(255,255,255,0.5); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);');
       const dotStyle = 'width:8px; height:8px; border-radius:50%; flex:none; display:block; background:' + (active ? '#fff' : p.color) + ';';
-      return { name: scLabels[i], en: p.en, color: p.color, style, dotStyle, onClick: () => this.setState({ showcaseTab: i, productTab: i }) };
+      const mStyle = 'display:flex; align-items:center; justify-content:center; gap:9px; width:100%; padding:13px 12px; border-radius:8px; font-size:15px; font-weight:700; ' + (active ? 'background:' + accent + '; color:#fff; border:1px solid ' + accent + ';' : 'background:#fff; color:#14202b; border:1px solid #dde6ec;');
+      return { name: scLabels[i], en: p.en, color: p.color, style, mStyle, dotStyle, onClick: () => this.setState({ showcaseTab: i, productTab: i }) };
     });
     const showcaseActive = productData[scTab];
     // leader-line callouts: each category points to a building part
@@ -1619,6 +1677,10 @@ class Component extends DCLogic {
       videoHintDisplay: this.state.isMobile ? 'none' : 'inline-flex',
       logoFilter: headerDark ? 'drop-shadow(0 1px 6px rgba(0,0,0,0.45))' : 'none',
       mobIconColor: headerDark ? '#ffffff' : '#1f2c36',
+      mobItemColor: this.state.menuDark ? '#ffffff' : '#14202b',
+      mobItemShadow: this.state.menuDark ? '0 1px 6px rgba(8,16,24,0.5)' : 'none',
+      mobPanelBg: this.state.menuDark ? 'rgba(14,26,38,0.62)' : 'rgba(255,255,255,0.72)',
+      mobDivider: this.state.menuDark ? 'rgba(255,255,255,0.16)' : 'rgba(20,32,43,0.10)',
       mobMenuShadow: headerDark ? '0 1px 8px rgba(8,16,24,0.55)' : '0 1px 3px rgba(255,255,255,0.6)',
       subTxt: headerDark ? '#eef4f9' : '#1c2832',
       deskNavDisplay: this.state.isMobile ? 'none' : 'flex',
