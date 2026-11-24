@@ -890,8 +890,9 @@
           </sc-for>
         </div>
         <div style="margin-top:28px; aspect-ratio:16/9; border-radius:var(--radius,2px); border:1px solid #e3eaef; overflow:hidden; background:#e8eef3;">
-          <iframe src="https://www.google.com/maps?q=%E9%AB%98%E9%9B%84%E5%B8%82%E9%B3%A5%E6%9D%BE%E5%8D%80%E6%B0%B4%E7%AE%A1%E8%B7%AF%E4%BA%8C%E5%B7%B71-28%E8%99%9F&amp;output=embed" title="寶鴻防水 地圖" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width:100%; height:100%; border:0; display:block;"></iframe>
+          <iframe src="https://www.google.com/maps?q=%E5%AF%B6%E9%B4%BB%E9%98%B2%E6%B0%B4%E9%98%B2%E7%86%B1%E6%9D%90%E6%96%99%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%4022.6478248,120.3884981&amp;ll=22.6478248,120.3884981&amp;z=17&amp;output=embed" title="寶鴻防水 地圖" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width:100%; height:100%; border:0; display:block;"></iframe>
         </div>
+        <a href="https://maps.app.goo.gl/vovpW3FRmdmSU6a47" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; margin-top:14px; font-size:14px; font-weight:600; color:var(--accent,#3f86c4);">在 Google 地圖開啟 <span aria-hidden="true">→</span></a>
       </div>
       <form data-inquiry="" onSubmit="{{ submitInquiry }}" style="background:#f6f9fb; border:1px solid #eaeff3; border-radius:var(--radius,2px); padding:40px;">
         <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;">
@@ -946,13 +947,17 @@
             <textarea name="message" rows="5" required="" placeholder="請描述現場狀況、施作位置及希望協助的事項" style="font-family:inherit; font-size:15px; padding:13px 14px; border:1px solid #dde6ec; border-radius:var(--radius,2px); background:#fff; outline:none; resize:vertical;"></textarea>
           </div>
           <label style="grid-column:1 / -1; display:flex; align-items:flex-start; gap:10px; font-size:14px; line-height:1.7; color:#56656f; cursor:pointer;">
+            <input type="text" name="website" tabIndex="-1" autoComplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
             <input type="checkbox" name="consent" required="" style="accent-color:var(--accent,#3f86c4); margin:5px 0 0; flex-shrink:0;">
             <span>我已閱讀隱私權政策，並同意提供上述資料，供本次工程諮詢、需求評估及後續聯繫使用。<span style="color:#c4453f; margin-left:3px;">*</span></span>
           </label>
         </div>
-        <button type="submit" style="margin-top:24px; width:100%; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#fff; background:var(--accent,#3f86c4); padding:16px; border-radius:var(--radius,2px); transition:background .2s;" style-hover="background:var(--accent-deep,#2c6398);">送出諮詢</button>
+        <button type="submit" style="margin-top:24px; width:100%; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#fff; background:var(--accent,#3f86c4); padding:16px; border-radius:var(--radius,2px); transition:background .2s;" style-hover="background:var(--accent-deep,#2c6398);" disabled="{{ inqSending }}">{{ inqBtnLabel }}</button>
         <sc-if value="{{ inquirySent }}" hint-placeholder-val="{{ false }}">
-          <div style="margin-top:16px; font-size:14px; color:#2f6e39; background:#e8f3ea; padding:12px 14px; border-radius:var(--radius,2px);">已收到您的諮詢，我們將盡快與您聯繫。</div>
+          <div role="status" style="margin-top:16px; font-size:14px; color:#2f6e39; background:#e8f3ea; padding:12px 14px; border-radius:var(--radius,2px);">已收到您的諮詢，我們將盡快與您聯繫。</div>
+        </sc-if>
+        <sc-if value="{{ inquiryError }}" hint-placeholder-val="{{ false }}">
+          <div role="alert" style="margin-top:16px; font-size:14px; color:#9b2c27; background:#fbeceb; padding:12px 14px; border-radius:var(--radius,2px);">送出失敗，請檢查網路後再試一次，或直接來電 07-7335353。</div>
         </sc-if>
       </form>
     </section>
@@ -1688,7 +1693,19 @@ class Component extends DCLogic {
       ddDistrict: this.makeDD('district', '選擇工程所在行政區', ['基隆市','台北市','新北市','桃園市','新竹市','新竹縣','苗栗縣','台中市','彰化縣','南投縣','雲林縣','嘉義市','嘉義縣','台南市','高雄市','屏東縣','宜蘭縣','花蓮縣','台東縣','澎湖縣','金門縣','連江縣']),
       ddStage: this.makeDD('stage', '選擇目前工程階段', ['規劃中','詢價或報價中','施工中','已完工或使用中']),
       noop: () => {},
-      inquirySent: !!this.state.inquirySent, submitInquiry: (e) => { e.preventDefault(); this.setState({ inquirySent: true }); },
+      inquirySent: this.state.inqStatus === 'sent', inquiryError: this.state.inqStatus === 'error',
+      inqSending: this.state.inqStatus === 'sending',
+      inqBtnLabel: this.state.inqStatus === 'sending' ? '送出中…' : '送出諮詢',
+      submitInquiry: (e) => {
+        e.preventDefault();
+        if (this.state.inqStatus === 'sending') return;
+        const form = e.target;
+        const body = new URLSearchParams(new FormData(form));
+        this.setState({ inqStatus: 'sending' });
+        fetch('https://script.google.com/macros/s/AKfycbwFD65gX3g0MPwhA9KKwdzzt8MpCC0K8E_GyefYvE0E8r7RmUs_yXnB7c5vuE65MHIN/exec', { method: 'POST', mode: 'no-cors', body })
+          .then(() => { form.reset(); this.setState({ inqStatus: 'sent', ddVals: {} }); })
+          .catch(() => this.setState({ inqStatus: 'error' }));
+      },
       goHome: go('home', 0), goAbout: go('about', 3), goProjects: go('projects', 'all'), goCareer: go('career', 0), goContact: go('contact', 0),
       goUpdates: go('blog', 2),
       whyGo1: go('about', 2), whyGo2: go('products', 0), whyGo3: go('projects', 'all'), whyGo4: go('about', 3), whyGo5: () => { this.go('contact', 0); setTimeout(() => { const f = document.querySelector('[data-inquiry]'); if (f) window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); }, 120); }, whyGo6: go('about', 0),
